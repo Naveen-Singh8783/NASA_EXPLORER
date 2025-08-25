@@ -12,7 +12,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 const NASA_KEY = process.env.NASA_KEY;
 
-app.get('/heath', (req, res) => {
+app.get('/health', (req, res) => {
     res.json({
         ok: true
     })
