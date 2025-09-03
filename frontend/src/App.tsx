@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchAPOD } from "./api";
+// ...
+import Mars from "./Mars";
+// ...
+<Mars />
+
 
 interface APODData {
   date: string;

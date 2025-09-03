@@ -44,7 +44,7 @@ app.get('/api/apod', async(req, res) => {
         const { earth_date = "2015-06-03", rover = "curiosity", camera } = req.query;
         const url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos`;
         const { data } = await axios.get(url, {
-             params: {api_key: NASA_KEY, date};
+             params: {api_key: NASA_KEY, date}
         });
         res.json(data);
         }catch(err){
