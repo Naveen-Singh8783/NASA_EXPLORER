@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchAPOD } from "./api";
-// ...
 import Mars from "./Mars";
-// ...
-<Mars />
-
 
 interface APODData {
   date: string;
@@ -17,9 +13,9 @@ interface APODData {
 
 function App() {
   const [data, setData] = useState<APODData | null>(null);
-  const [date, setDate] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [date, setDate] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function load(d?: string) {
     try {
@@ -35,20 +31,14 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    load();
-  }, []);
+  useEffect(() => { load(); }, []);
 
   return (
     <div style={{ maxWidth: 900, margin: "2rem auto", padding: "1rem" }}>
       <h1>NASA Explorer — APOD</h1>
 
       <div style={{ display: "flex", gap: "0.5rem", margin: "1rem 0" }}>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
         <button onClick={() => load(date)}>Load</button>
         <button onClick={() => { setDate(""); load(); }}>Today</button>
       </div>
@@ -72,6 +62,11 @@ function App() {
           {data.explanation && <p style={{ marginTop: "1rem" }}>{data.explanation}</p>}
         </article>
       )}
+
+      {/* Render Mars here */}
+      <hr style={{ margin: "2rem 0" }} />
+      <h2>Mars</h2>
+      <Mars />
     </div>
   );
 }
