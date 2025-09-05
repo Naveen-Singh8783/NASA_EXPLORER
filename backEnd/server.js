@@ -56,6 +56,25 @@ app.get('/api/apod', async(req, res) => {
         }
     });
 
+    // GET /api/neo?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD
+app.get("/api/neo", async (req, res) => {
+  try {
+    const { start_date, end_date } = req.query;
+    const url = "https://api.nasa.gov/neo/rest/v1/feed";
+    const { data } = await axios.get(url, {
+      params: { api_key: NASA_KEY, start_date, end_date }
+    });
+    res.json(data); // has near_earth_objects map by date
+  } catch (err) {
+    console.error(err?.response?.data || err.message);
+    res.status(err?.response?.status || 500).json({
+      error: "Failed to fetch NEO feed",
+      details: err?.response?.data || err.message
+    });
+  }
+});
+
+
 
 
 app.listen(PORT, () => {
