@@ -17,3 +17,12 @@ export async function fetchMars({date, rover, camera}: {date: any, rover: any, c
     if(!res.ok)throw new Error(`Mars error: ${res.status}`);
     return res.json();
 }
+
+export async function fetchNeo({start, end}: {start: any, end: any}){
+    const url = new URL(`/api/neo`, BASE);
+    if(start)url.searchParams.set('start_date', start);
+    if(end)url.searchParams.set('end_date', end);
+    const res = await fetch(url);
+    if(!res.ok)throw new Error(`Neo erro: ${res.status}`);
+    return res.json();
+}
