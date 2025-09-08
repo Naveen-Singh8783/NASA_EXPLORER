@@ -18,7 +18,7 @@ export async function fetchMars({date, rover, camera}: {date: any, rover: any, c
     return res.json();
 }
 
-export async function fetchNeo({start, end}: {start: any, end: any}){
+export async function fetchNEO({start, end}: {start: any, end: any}){
     const url = new URL(`/api/neo`, BASE);
     if(start)url.searchParams.set('start_date', start);
     if(end)url.searchParams.set('end_date', end);

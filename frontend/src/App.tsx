@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchAPOD } from "./api";
 import Mars from "./Mars";
+import NeoChart from "./NeoChart";
 
 interface APODData {
   date: string;
@@ -67,6 +68,11 @@ function App() {
       <hr style={{ margin: "2rem 0" }} />
       <h2>Mars</h2>
       <Mars />
+
+      {/* Render Neo here */}
+      <hr style={{ margin: "2rem 0" }} />
+      <h2>Mars</h2>
+      <NeoChart />
     </div>
   );
 }
