@@ -6,7 +6,6 @@ import './app.css';
 import Dashboard from './pages/Dashboard';
 import Mars from './pages/Mars';
 import Neo from './pages/Neo';
-import './App.css';
 
 
 const router = createBrowserRouter([

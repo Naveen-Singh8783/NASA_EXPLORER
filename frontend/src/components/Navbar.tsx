@@ -10,7 +10,7 @@ const linkCls = ({ isActive }: { isActive: boolean }) =>
 
 return (
 <header className="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-gray-950/60 border-b border-gray-200/70 dark:border-gray-800">
-<nav className="container flex items-center justify-between h-14">
+<nav className="max-w-6xl mx-auto px-4 flex items-center justify-between h-14">
 <Link to="/" className="flex items-center gap-2 font-semibold">
 <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">🛰️</span>
 <span>NASA Explorer</span>

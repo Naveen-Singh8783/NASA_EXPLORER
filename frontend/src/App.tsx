@@ -1,80 +1,20 @@
-import { useEffect, useState } from "react";
-import { fetchAPOD } from "./api";
-import Mars from "./Mars";
-import NeoChart from "./NeoChart";
+import { Outlet } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
-interface APODData {
-  date: string;
-  title: string;
-  explanation: string;
-  url: string;
-  hdurl?: string;
-  media_type: string;
+
+export default function App() {
+return (
+<div className="min-h-dvh bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+<Navbar />
+<main className="pb-16">
+<Outlet />
+</main>
+<footer className="border-t border-gray-200 dark:border-gray-800 py-6 mt-10">
+<div className="max-w-6xl mx-auto px-4 text-sm text-gray-500 flex items-center justify-between">
+<span>Built with NASA APIs</span>
+<a className="underline" href="https://github.com/yourname/nasa-explorer" target="_blank">GitHub</a>
+</div>
+</footer>
+</div>
+);
 }
-
-function App() {
-  const [data, setData] = useState<APODData | null>(null);
-  const [date, setDate] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  async function load(d?: string) {
-    try {
-      setLoading(true);
-      setError("");
-      const apod = await fetchAPOD(d);
-      setData(apod);
-    } catch (e: any) {
-      setError(e.message || "Failed to load");
-      setData(null);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => { load(); }, []);
-
-  return (
-    <div style={{ maxWidth: 900, margin: "2rem auto", padding: "1rem" }}>
-      <h1>NASA Explorer — APOD</h1>
-
-      <div style={{ display: "flex", gap: "0.5rem", margin: "1rem 0" }}>
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-        <button onClick={() => load(date)}>Load</button>
-        <button onClick={() => { setDate(""); load(); }}>Today</button>
-      </div>
-
-      {loading && <p>Loading…</p>}
-      {error && <p style={{ color: "crimson" }}>{error}</p>}
-      {data && (
-        <article>
-          <h2>{data.title}</h2>
-          <p><i>{data.date}</i></p>
-          {data.media_type === "image" ? (
-            <img src={data.url} alt={data.title} style={{ width: "100%", borderRadius: 12 }} />
-          ) : (
-            <iframe
-              title="apod-video"
-              src={data.url}
-              style={{ width: "100%", height: 480, border: 0, borderRadius: 12 }}
-              allowFullScreen
-            />
-          )}
-          {data.explanation && <p style={{ marginTop: "1rem" }}>{data.explanation}</p>}
-        </article>
-      )}
-
-      {/* Render Mars here */}
-      <hr style={{ margin: "2rem 0" }} />
-      <h2>Mars</h2>
-      <Mars />
-
-      {/* Render Neo here */}
-      <hr style={{ margin: "2rem 0" }} />
-      <h2>Mars</h2>
-      <NeoChart />
-    </div>
-  );
-}
-
-export default App;
